@@ -1,0 +1,14 @@
+.category-item {
+    background-color: #C6FFC1;
+    border: 1px solid #83AA81;
+    border-radius: 4px;
+    padding: 1em;
+}
+
+.category-item+.category-item {
+    margin-top: 1rem;
+}
+
+.category-item.active {
+    background-color: #DFFFA0;
+}
