@@ -31,12 +31,13 @@ class App extends React.PureComponent {
       requiredHumidity: '',
       plantBlooming: '',
       plantDifficulty: '',
+      isPalidrome: false,
+
     };
-    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
 
     const stopProgress = () => {
       console.log('stopProgress');
@@ -95,24 +96,28 @@ class App extends React.PureComponent {
     });
   }
 
-  // inputOnChange = (event) => {
-  //   this.setState({ value: event.currentTarget.value});
-  // };
-
-
-  // ----------------------------------------------
   // funkcja sprawdzajaca czy wyraz jest palidromem
+  // palindrome(str) {
+  //   let reversed = str.split('').reverse().join('');
+  //   return str === reversed ? true : false;
+  // }
 
-
-
-  handleChange(event) {
-    const { name, value, type, checked } = event.target
-    type === 'checkbox' ?
-      this.setState({ [name]: checked }) :
-      this.setState({ [name]: value })
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(this.state.plantName)
+    if (this.state.plantName === 'kaktus') {
+      this.setState({ isPalidrome: true })
+    }
   }
 
+  handleChange = (event) => {
+    const { name, value, type, checked } = event.target
+    this.setState({ [name]: type === 'checkbox' ? checked : value })
+  }
+
+  // ******************************************* //
   render() {
+
+    // console.log(palindrome(this.plantName))
     const {
       categories,
       plants,
@@ -120,16 +125,17 @@ class App extends React.PureComponent {
       successCategories,
       successPlants,
       value,
+      isPalidrome,
     } = this.state;
-
-    console.log('render');
 
     return (
       <React.Fragment>
         <div className='plant-add-form'>
           <h1>Add new plant</h1>
           <form method="GET">
+            {isPalidrome ? 'KAKTUS!!' : ''}
             <label className='label-form'>Name:</label>
+
             <input
               type='text'
               value={this.state.plantName}
